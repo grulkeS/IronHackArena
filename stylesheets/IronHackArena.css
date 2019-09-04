@@ -58,7 +58,7 @@ p {
   text-align: right; 
 }
 
-.charFaceAndSkillDiv span img {
+.charFaceAndSkillDiv {
   size: 20em;
 }
 .resourceTitel div{
@@ -77,3 +77,20 @@ p {
   color: blue;
   background-color: beige;
 }
+
+#player0CharsActive .chars {
+  opacity: 1.0;
+}
+
+#player1CharsActive .chars {
+  opacity: 1.0;
+}
+
+#player0Chars .chars {
+  opacity: 0.5;
+}
+
+#player1Chars .chars {
+  opacity: 0.5;
+}
+

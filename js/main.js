@@ -1,8 +1,16 @@
 
 let game = new IronHackGame();
+game.whoIsNext();
 
+/*function getActivePlayer () {
+  game.players[game.turn];
+  if(game.players[game.turn].status === "inactive"){
+    game.players[game.turn].status = "active";
+  }
+  console.log(game.players[game.turn]);
+}
 console.log(game);
-
+getActivePlayer();*/
 
 /*document.addEventListener("DOMContentLoaded", function(event) { 
   let html = '';
@@ -37,5 +45,20 @@ console.log(game);
       console.log('Card clicked: ', card);
     };
   });*/
+  
+  let skillNumbers = document.getElementsByClassName('skills');
+  let chosenSkill = "";
+for(let i=0; i < skillNumbers.length; i++){
+  skillNumbers[i].onclick = function(e){
+    chosenSkill = skillNumbers[i].getElementsByTagName("img")[0];
+    console.log(chosenSkill);
+  }
+}
 
-
+  /*document.querySelectorAll(".player"+game.turn).forEach( char => {
+    char.onclick = function() {
+      // TODO: write some code here
+      char.parentNode;
+      console.log(char);
+    };
+  });*/
