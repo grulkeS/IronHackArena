@@ -1,0 +1,79 @@
+html {
+  background: url("../img/background.jpg") no-repeat;
+  background-size: cover;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+
+h1 {
+  color: rgba(215, 40, 40, 0.9);
+  font-weight: bolder;
+  font-size: 67px;
+  text-align: center;
+  text-shadow: 0px 0px 20px rgba(150, 150, 150, 1);
+
+}
+
+h2 {
+  color: #456783;
+  font-weight: bolder;
+  font-size: 35px;
+  text-align: center;
+  text-shadow: 1px #ff0000;
+  text-shadow: 1px #ff0000;
+}
+
+p {
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: center;
+}
+
+.gameArea {
+  display: flex;
+  justify-content: space-around;
+  margin: 3em;
+}
+
+.chars {
+  margin: 1em;
+  
+}
+
+#player1 span, #player2 span {
+  color: white;
+  font-weight: bold;
+}
+
+.playerName {
+  font-size: 35px;
+}
+
+#player1, #player2 {
+  background-color: darkblue;
+  background-size: cover;
+}
+
+#player2 {
+  text-align: right; 
+}
+
+.charFaceAndSkillDiv span img {
+  size: 20em;
+}
+.resourceTitel div{
+  display: flex;
+  justify-content: center;
+} 
+
+#nextRoundButton {
+  display: flex;
+  justify-content: center;
+}
+#nextRoundButton button {
+  height: 3em;
+  width: 10em;
+  font-size: 2em;
+  color: blue;
+  background-color: beige;
+}
