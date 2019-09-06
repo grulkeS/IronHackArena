@@ -90,19 +90,12 @@ p {
   background-color: beige;
 }
 
-#player0CharsActive .chars span {
-  opacity: 1.0;
-}
-
-#player1CharsActive .chars span {
-  opacity: 1.0;
-}
 
 #player0Chars .chars span {
   opacity: 0.5;
 }
 
-#player1Chars .chars {
+#player1Chars .chars span {
   opacity: 0.5;
 }
 
