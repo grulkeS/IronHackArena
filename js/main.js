@@ -7,7 +7,6 @@ startButton.onclick = function (e) {
   game.state = "choosingSkills";
 //  game.changeGameButton();
 console.log(game.skillNumbers);
-  game.choosingSkill();
   game.updateDOM(game.turn);
 
 }
