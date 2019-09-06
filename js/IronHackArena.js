@@ -33,13 +33,23 @@ class IronHackGame {
         this.skillNumbers[i].style.opacity = 1;
       }
     } else if (this.state === "skillChosen") {
-      console.log(document.getElementById("player0_batman_1"));
-      document.getElementById("player0_batman_1").border = "5";
+      for(let i=0; i<= this.players.length-1;i++){
+        for(let j=0; j<= this.players[i].characters.length-1; j++){
+          if(this.players[i].characters[j].chosenSkill !== ""){
+            console.log(i);
+            console.log(j);
+            console.log(this.players[i].characters[j].chosenSkill);
+            document.getElementById(""+i+j+this.players[i].characters[j].chosenSkill).border= "5";
+          }
+        }
+      }
+      
+     /* document.getElementById("player0_batman_1").border = "5";
       for (let i = 0; i <= this.skillNumbers - 1; i++) {
         if (skillNumbers[i] !== document.getElementById("player0_batman_1")) {
           skillNumbers[i].style.opacity = 0.5;
         }
-      }
+      }*/
     }
 
   }
