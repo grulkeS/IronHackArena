@@ -10,7 +10,6 @@ class IronHackGame {
     document.getElementById("player0Name").innerHTML = this.players[0].playerName;
     document.getElementById("player1Name").innerHTML = this.players[1].playerName;
     //this.choosingSkill=this.choosingSkill.bind(this);
-
     //document.getElementById("player"+this.turn+"Name").innerHTML=this.players[this.turn].playerName+ " ist jetzt dran";
     //document.getElementById("player" + this.turn + "Chars").id = ("player" + this.turn + "CharsActive");
     console.log(this.turn);
@@ -27,17 +26,45 @@ class IronHackGame {
   updateDOM() {
     if (this.state === "start") {
       document.getElementsByClassName("gameArea")[0].style.opacity = 0.5;
+    } else if (this.state === "choosingSkills") {
+      this.selectedSkillsStyling();
+    } else if (this.state === "skillChosen") {
+      this.selectedSkillsStyling();
+      /* document.getElementById("player0_batman_1").border = "5";
+       for (let i = 0; i <= this.skillNumbers - 1; i++) {
+         if (skillNumbers[i] !== document.getElementById("player0_batman_1")) {
+           skillNumbers[i].style.opacity = 0.5;
+         }
+       }*/
     }
-    else if (this.state === "choosingSkills") {
+    else if (this.state === "avatarChosen") {
+      //add sourceAvatar+SourceSkill zu Target AvatarBox
+      this.selectedSkillsStyling();
+    }
+  }
+
+  //document.getElementById("player" + this.turn + "Name").innerHTML = this.players[this.turn].playerName + " ist jetzt dran";
+  /*changeGameButton(){
+    document.getEle mentById("startGameButton").innerHTML="Next Round";
+    document.getElementById("startGameButton").id="nextRound";
+  }*/
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  selectedSkillsStyling() {
+    //checks for stage and reacts on it with styling changes in regards to selection
+    if (this.state === "choosingSkills") {
       document.getElementsByClassName("gameArea")[0].style.opacity = 1;
-      for(let a=0;a<=this.avatarTarget.length-1;a++){
+      for (let a = 0; a <= this.avatarTarget.length - 1; a++) {
         this.avatarTarget[a].style.opacity = 0.5;
       }
-      
       for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
         this.skillNumbers[i].style.opacity = 1;
       }
-
       if (this.turn === 0) {
         for (let i = 0; i <= this.skillsp1.length - 1; i++) {
           document.getElementsByClassName("p1skills")[i].style.opacity = 0.5;
@@ -47,10 +74,8 @@ class IronHackGame {
           document.getElementsByClassName("p0skills")[i].style.opacity = 0.5;
         }
       }
-
-
-    } else if (this.state === "skillChosen") {
-      console.log(this.skillNumbers);
+    }
+    else if (this.state === "skillChosen") {
       for (let s = 0; s <= this.skillNumbers.length - 1; s++) {
         this.skillNumbers[s].style.opacity = 0.5;
       }
@@ -61,8 +86,8 @@ class IronHackGame {
             document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "5";
           }
         }
-        
       }
+      console.log(this.skillNumbers);
       console.log(this.avatarTarget);
       console.log(this.turn);
       if (this.turn === 0) {
@@ -73,35 +98,21 @@ class IronHackGame {
         for (let a = 0; a <= this.avatarp0.length - 1; a++) {
           this.avatarp0[a].style.opacity = 1;
         }
-      }this.state="choosingAvatars";
-    }else if(this.state === "choosingAvatars"){
-      //add sourceAvatar+SourceSkill zu Target AvatarBox
-      
+      } this.state = "choosingAvatars";
     }
+    else if(this.state === "avatarChosen"){
+      this.state = "choosingSkills";
+      for (let i = 0; i <= this.players.length - 1; i++) {
+        for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
+          if (this.players[i].characters[j].chosenSkill !== "") {
+            //document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).parentNode.style.opacity = 1;
+            document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "";
+          }
+        }
+      }
+      this.updateDOM();
 
-      /* document.getElementById("player0_batman_1").border = "5";
-       for (let i = 0; i <= this.skillNumbers - 1; i++) {
-         if (skillNumbers[i] !== document.getElementById("player0_batman_1")) {
-           skillNumbers[i].style.opacity = 0.5;
-         }
-       }*/
-
-
-  }
-
-
-  //document.getElementById("player" + this.turn + "Name").innerHTML = this.players[this.turn].playerName + " ist jetzt dran";
-
-
-
-  /*changeGameButton(){
-    document.getEle mentById("startGameButton").innerHTML="Next Round";
-    document.getElementById("startGameButton").id="nextRound";
-  }*/
-  getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
+    }
   }
 
   addEventhandlerToAllSkills() {
@@ -109,25 +120,24 @@ class IronHackGame {
       this.skillNumbers[i].onclick = (e) => {
         console.log(e);
         console.log(this.state);
-
         if (this.state === "choosingSkills") {
-
           let savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
           console.log(savedSkill);
           console.log(savedSkill.split(""))
+          if(this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill === ""){
           this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill = savedSkill.split("")[2];
           console.log(this.players);
           this.state = "skillChosen";
           this.updateDOM();
+          } else{return;}
         }
-
       }
     }//this.choosingAvatar();
   }
 
   addEventhandlerToAllAvatars() {
     console.log(this.avatarTarget);
-    for (let i = 0; i <= this.avatarTarget.length-1; i++) {
+    for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
       this.avatarTarget[i].onclick = (e) => {
         if (this.state === "choosingAvatars") {
           let savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
@@ -135,13 +145,13 @@ class IronHackGame {
           console.log(savedAvatar.split(""))
           this.players[savedAvatar.split("")[0]].chosenAvatar = savedAvatar.split("")[1];
           console.log(this.players);
-          this.state = "choosingSkills";
+          this.state = "avatarChosen";
           this.updateDOM();
         }
-
       }
     }
   }
+
   /*whoStartsFirst() {
 
     this.turn = 0;
@@ -160,7 +170,6 @@ class IronHackGame {
 class Player {
   constructor(spielerName) {
     this.playerName = spielerName;
-    this.chosenAvatar = "";
     this.characters = [
       new Char("Captain SuperDoom"),
       new Char("Hero 74"),
