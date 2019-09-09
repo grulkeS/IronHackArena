@@ -25,6 +25,7 @@ class IronHackGame {
     this.addEventhandlerToAllAvatars();
   }
   updateDOM() {
+    // this is the perfect case where the switch(){} statements is of great help in readibility
     if (this.state === "start") {
       document.getElementsByClassName("gameArea")[0].style.opacity = 0.5;
     }
@@ -34,23 +35,25 @@ class IronHackGame {
         this.avatarTarget[a].style.opacity = 0.5;
       }
       
+      // this is a good refactoring candidate for a .forEach()
       for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
         this.skillNumbers[i].style.opacity = 1;
       }
 
       if (this.turn === 0) {
+        // this is a good refactoring candidate for a .forEach()
         for (let i = 0; i <= this.skillsp1.length - 1; i++) {
           document.getElementsByClassName("p1skills")[i].style.opacity = 0.5;
         }
       } else {
+        // this is a good refactoring candidate for a .forEach()
         for (let i = 0; i <= this.skillsp0.length - 1; i++) {
           document.getElementsByClassName("p0skills")[i].style.opacity = 0.5;
         }
       }
-
-
     } else if (this.state === "skillChosen") {
       console.log(this.skillNumbers);
+      // this is a good refactoring candidate for a .forEach()
       for (let s = 0; s <= this.skillNumbers.length - 1; s++) {
         this.skillNumbers[s].style.opacity = 0.5;
       }
@@ -98,18 +101,18 @@ class IronHackGame {
     document.getEle mentById("startGameButton").innerHTML="Next Round";
     document.getElementById("startGameButton").id="nextRound";
   }*/
-  getRandomInt(min, max) {
+  getRandomInt(min, max) { // please read about helper functions in a class
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  addEventhandlerToAllSkills() {
+  addEventhandlerToAllSkills() { // Very good naming and use of functions
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
-      this.skillNumbers[i].onclick = (e) => {
-        console.log(e);
+      this.skillNumbers[i].onclick = (event) => { // please use meningful names for vairables
+        console.log(event);
         console.log(this.state);
-
+        // I do not see that you use the "event" paramenter to the fucntion. Then either delete it from the arguments or use it
         if (this.state === "choosingSkills") {
 
           let savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
@@ -125,7 +128,7 @@ class IronHackGame {
     }//this.choosingAvatar();
   }
 
-  addEventhandlerToAllAvatars() {
+  addEventhandlerToAllAvatars() { // Very good naming and use of functions
     console.log(this.avatarTarget);
     for (let i = 0; i <= this.avatarTarget.length-1; i++) {
       this.avatarTarget[i].onclick = (e) => {
@@ -180,7 +183,7 @@ class Player {
     console.log(this.resources.neutral());
   }
 
-  getRandomInt(min, max) {
+  getRandomInt(min, max) { // please read about helper functions in a class
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
