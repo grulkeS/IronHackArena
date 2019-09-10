@@ -70,6 +70,7 @@ p {
   display: flex;
   justify-content: center;
 }
+
 #startGameButton button {
   height: 3em;
   width: 10em;
@@ -82,6 +83,7 @@ p {
   display: flex;
   justify-content: center;
 }
+
 #startGameButton button {
   height: 3em;
   width: 10em;
@@ -89,7 +91,6 @@ p {
   color: blue;
   background-color: beige;
 }
-
 
 #player0Chars .chars span {
   opacity: 0.5;
