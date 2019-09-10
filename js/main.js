@@ -17,6 +17,7 @@ startButton.onclick = () => {
       
     }
     document.getElementsByName("startGame")[0].onclick=game.nextRound();
+    console.log(game.fightSequence);
   }
   
   game.state = "choosingSkills";

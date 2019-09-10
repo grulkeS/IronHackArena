@@ -7,8 +7,16 @@ class IronHackGame {
     ];
     this.turn = 0;
     this.state = "start";
+    this.fightSequence = [];
+    this.fightSequenceElement = [];
     document.getElementById("player0Name").innerHTML = this.players[0].playerName;
     document.getElementById("player1Name").innerHTML = this.players[1].playerName;
+    document.getElementById("00_health").value = this.players[0].characters[0].health;
+    document.getElementById("01_health").value = this.players[0].characters[1].health;
+    document.getElementById("02_health").value = this.players[0].characters[2].health;
+    document.getElementById("10_health").value = this.players[1].characters[0].health;
+    document.getElementById("11_health").value = this.players[1].characters[1].health;
+    document.getElementById("12_health").value = this.players[1].characters[2].health;
     //this.choosingSkill=this.choosingSkill.bind(this);
     //document.getElementById("player"+this.turn+"Name").innerHTML=this.players[this.turn].playerName+ " ist jetzt dran";
     //document.getElementById("player" + this.turn + "Chars").id = ("player" + this.turn + "CharsActive");
@@ -130,6 +138,8 @@ class IronHackGame {
           console.log(savedSkill.split(""))
           if(this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill === ""){
           this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill = savedSkill.split("")[2];
+          this.fightSequenceElement.push(this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill);
+          console.log(this.characterStatus);
           console.log(this.players);
           this.state = "skillChosen";
           this.updateDOM();
@@ -149,6 +159,9 @@ class IronHackGame {
           console.log(savedAvatar.split(""))
           this.players[savedAvatar.split("")[0]].chosenAvatar = savedAvatar.split("")[1];
           console.log(this.players);
+          this.fightSequenceElement.push(this.players[savedAvatar.split("")[0]].chosenAvatar);
+          this.fightSequence.push(this.fightSequenceElement);
+          this.fightSequenceElement = [];
           this.state = "avatarChosen";
           this.updateDOM();
         }
