@@ -49,10 +49,10 @@ p {
   font-size: 35px;
 }
 
-#player1, #player2 {
+/*#player1, #player2 {
   background-color: darkblue;
   background-size: cover;
-}
+}*/
 
 #player2 {
   text-align: right; 
@@ -92,16 +92,16 @@ p {
 
 
 #player0Chars .chars span {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 #player1Chars .chars span {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .gameAreaInactiv {
   display: flex;
   justify-content: space-around;
   margin: 3em;
-  opacity: 0.5
+  opacity: 0.8
 }

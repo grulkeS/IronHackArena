@@ -69,26 +69,35 @@ class IronHackGame {
       case "choosingSkills":
       document.getElementsByClassName("gameArea")[0].style.opacity = 1;
       for (let a = 0; a <= this.avatarTarget.length - 1; a++) {
-        this.avatarTarget[a].style.opacity = 0.5;
+        this.avatarTarget[a].style.opacity = 0.8;
       }
+      /*this.avatarTarget.forEach((avatarImg) => {
+        avatarImg.style.opacity = 0.8;
+      });*/
       for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
         this.skillNumbers[i].style.opacity = 1;
       }
+      /*this.skillNumbers.forEach((skillImg) => {
+      skillImg.style.opacity = 1;
+      });*/
       if (this.turn === 0) {
         for (let i = 0; i <= this.skillsp1.length - 1; i++) {
-          document.getElementsByClassName("p1skills")[i].style.opacity = 0.5;
+          document.getElementsByClassName("p1skills")[i].style.opacity = 0.8;
         }
       } else {
         for (let i = 0; i <= this.skillsp0.length - 1; i++) {
-          document.getElementsByClassName("p0skills")[i].style.opacity = 0.5;
+          document.getElementsByClassName("p0skills")[i].style.opacity = 0.8;
         }
       }
       break;
 
       case "skillChosen" : 
       for (let s = 0; s <= this.skillNumbers.length - 1; s++) {
-        this.skillNumbers[s].style.opacity = 0.5;
+        this.skillNumbers[s].style.opacity = 0.8;
       }
+      /*this.skillNumbers.forEach((skillImg) => {
+      skillImg.style.opacity = 0.8;
+      });*/
       for (let i = 0; i <= this.players.length - 1; i++) {
         for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
           if (this.players[i].characters[j].chosenSkill !== "") {
@@ -260,10 +269,10 @@ class Char {
     this.health = 100;
     this.chosenSkill = "";
     this.skills = [
-      { type: "damage", value: 10 },
+      { type: "damage", value: 10,  },
       { type: "healSomeOne", value: 10 },
       { type: "damageOverTime", value: [5, 1] },
-      { type: "invul", value: true }
+      { type: "invul", value: 1 }
     ];
   }
 }
