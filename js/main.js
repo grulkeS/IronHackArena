@@ -3,11 +3,17 @@ let game = new IronHackGame();
 game.updateDOM();
 startButton = document.getElementById("startGameButton");
 
-startButton.onclick = function (e) {
+startButton.onclick = function () {
+  //console.log(document.getElementsByName("startGame")[0].innerHTML);
+  if(document.getElementsByName("startGame")[0].innerHTML==="Start Game"){
+    document.getElementsByName("startGame")[0].innerHTML="Next Round"
+    
+  }else{document.getElementsByName("startGame")[0].onclick=game.nextRound();}
+  
   game.state = "choosingSkills";
 //  game.changeGameButton();
 console.log(game.skillNumbers);
-  game.updateDOM(game.turn);
+  game.updateDOM();
 
 }
 console.log(game.state)

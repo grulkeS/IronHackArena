@@ -57,7 +57,8 @@ class IronHackGame {
 
   selectedSkillsStyling() {
     //checks for stage and reacts on it with styling changes in regards to selection
-    if (this.state === "choosingSkills") {
+    switch (this.state){
+      case "choosingSkills":
       document.getElementsByClassName("gameArea")[0].style.opacity = 1;
       for (let a = 0; a <= this.avatarTarget.length - 1; a++) {
         this.avatarTarget[a].style.opacity = 0.5;
@@ -74,8 +75,9 @@ class IronHackGame {
           document.getElementsByClassName("p0skills")[i].style.opacity = 0.5;
         }
       }
-    }
-    else if (this.state === "skillChosen") {
+      break;
+
+      case "skillChosen" : 
       for (let s = 0; s <= this.skillNumbers.length - 1; s++) {
         this.skillNumbers[s].style.opacity = 0.5;
       }
@@ -83,7 +85,8 @@ class IronHackGame {
         for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
           if (this.players[i].characters[j].chosenSkill !== "") {
             document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).parentNode.style.opacity = 1;
-            document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "5";
+            document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "1";
+            //document.getElementById("selectedSkill").src="";
           }
         }
       }
@@ -99,8 +102,9 @@ class IronHackGame {
           this.avatarp0[a].style.opacity = 1;
         }
       } this.state = "choosingAvatars";
-    }
-    else if(this.state === "avatarChosen"){
+        break;
+      
+      case "avatarChosen":
       this.state = "choosingSkills";
       for (let i = 0; i <= this.players.length - 1; i++) {
         for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
@@ -111,7 +115,7 @@ class IronHackGame {
         }
       }
       this.updateDOM();
-
+      break;
     }
   }
 
@@ -138,7 +142,7 @@ class IronHackGame {
   addEventhandlerToAllAvatars() {
     console.log(this.avatarTarget);
     for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
-      this.avatarTarget[i].onclick = (e) => {
+      this.avatarTarget[i].onclick = () => {
         if (this.state === "choosingAvatars") {
           let savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
           console.log(savedAvatar);
@@ -158,7 +162,7 @@ class IronHackGame {
 
   }*/
 
-  whoIsNext() {
+  nextRound() {
     if (this.turn === this.players.length - 1) {
       this.turn = 0;
     } else {
