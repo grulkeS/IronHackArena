@@ -3,12 +3,21 @@ let game = new IronHackGame();
 game.updateDOM();
 startButton = document.getElementById("startGameButton");
 
-startButton.onclick = function () {
+startButton.onclick = () => {
   //console.log(document.getElementsByName("startGame")[0].innerHTML);
   if(document.getElementsByName("startGame")[0].innerHTML==="Start Game"){
     document.getElementsByName("startGame")[0].innerHTML="Next Round"
     
-  }else{document.getElementsByName("startGame")[0].onclick=game.nextRound();}
+  }else{
+    for(i=0;i<=game.players[game.turn].characters.length-1;i++){
+      //game.players[game.turn].characters[i].chosenSkill = "";
+      if(game.players[game.turn].characters[i].chosenSkill !== ""){
+        game.players[game.turn].characters[i].chosenSkill = "";
+      }
+      
+    }
+    document.getElementsByName("startGame")[0].onclick=game.nextRound();
+  }
   
   game.state = "choosingSkills";
 //  game.changeGameButton();
