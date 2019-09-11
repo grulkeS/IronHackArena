@@ -23,6 +23,7 @@ startButton.onclick = () => {
   game.state = "choosingSkills";
   //  game.changeGameButton();
   console.log(game.skillNumbers);
+  
   game.updateDOM();
 }
 console.log(game.state)

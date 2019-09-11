@@ -174,19 +174,19 @@ class IronHackGame {
           console.log(this.players);
           this.fightSequenceElement.push(this.players[savedAvatar.split("")[0]].chosenAvatar);
           if (this.turn === 0) {
-              this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]);
-            } else {
-              this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]);
-            }
+            this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]);
+          } else {
+            this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]);
           }
-          console.log(this.players);
-          this.fightSequence.push(this.fightSequenceElement);
-          this.fightSequenceElement = [];
-          this.state = "avatarChosen";
-          this.updateDOM();
         }
+        console.log(this.players);
+        this.fightSequence.push(this.fightSequenceElement);
+        this.fightSequenceElement = [];
+        this.state = "avatarChosen";
+        this.updateDOM();
       }
     }
+  }
 
   /*whoStartsFirst() {
 
@@ -278,25 +278,50 @@ class Char {
     this.charName = name;
     this.health = 100;
     this.chosenSkill = "";
-    //this.isActive = 0;
+    this.isActive = 0;
     this.beeingAttacked = [];
     this.beeingBuffed = [];
     this.isInvulnerable = 0;
     this.skills = [
       { type: "damage", value: 10 },
       { type: "healSomeOne", value: 10 },
-      { type: "damageOverTime", value: 5 },
+      { type: "DoT", value: 5 },
       { type: "invulnerable", value: 1 }
     ];
   }
 
   recieveDamageAndTypeStateChanges() {
-    for(i=0; i<= this.beeingAttacked.length-1;i++){
-      if(this.beeingAttacked[i].type==="damage"){
-        
+    for (i = 0; i <= this.beeingAttacked.length - 1; i++) {
+      switch (type) {
+        case "damage":
+          this.health -= this.beeingAttacked.value;
+          this.beeingAttacked.rounds -= 1;
+          break;
+        case "heal":
+          this.health += this.beeingAttacked.value;
+          this.beeingAttacked.rounds -= 1;
+          break;
+        case "invulnerable":
+          this.invulnerable = 1;
+          this.beeingAttacked.rounds -= 1;
+          break;
+        case "dot":
+          this.health -= value;
+          this.beeingAttacked.rounds -= 1;
+          break;
+        case "stun":
+          this.health -= this.beeingAttacked.value;
+          this.isActive = this.beeingAttacked.rounds;
+          this.beeingAttacked.rounds -= 1;
       }
+      let onlyStillActiveEffekts = this.beeingAttacked.filter((rounds) => {
+        return rounds.rounds > 0;
+        
+      })
+      this.beeingAttacked = onlyStillActiveEffekts;
+      console.log(this.beeingAttacked);
     }
-   
+
   }
 }
 
