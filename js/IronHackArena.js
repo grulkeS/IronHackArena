@@ -18,20 +18,35 @@ class IronHackGame {
     document.getElementById("11_health").value = this.players[1].characters[1].health;
     document.getElementById("12_health").value = this.players[1].characters[2].health;
     this.skillDescriptions = [
-      "Batman punches with the force of all his anger and desperation!",
-      "Batman throws his Batwing and stuns you for one turn!",
-      "Batman calls Robin, together they punch even harder!",
+      "Batman punches with the force of all his anger and desperation! Deals 20 damage to its target.",
+      "Batman throws his Batwing and stuns for one turn!",
+      "Batman calls Robin, together they punch even harder! Deals 30 damage to its target.",
       "Batman uses his grapple to get out of a fight, becomes unattackable for one turn and removes all debuffs!",
-      "Ironman shoots Highenergybeam from his Hand!",
-      "Ironman calls his suits to protect everyone for 15 damage reduction!",
-      "Ironman flies really fast and punches you!",
+      "Ironman shoots Highenergybeam from his Hand! Dealing 15 damage to its target",
+      "Ironman calls his suits to protect someone on the team. Applies 15 damage reduction to an ally for 1 turn!",
+      "Ironman flies really fast and punches the enemy! Deals 35 damage to his target.",
       "Ironman calls his thickest indestructable armored suit, becomes invulnerable for one turn and removes all debuffs!",
-      "Superman flies towards you and punches you. Wow what a punch!",
-      "Superman uses his laserbeams from his eyes, leaving initial damage and you burn for 2 turns, 5 damage each turn!",
-      "Superman blows his superhuman breath on every enemy!",
+      "Superman flies towards the enemie and throws a punch. Wow what a punch! Deals 25 damage to its target.",
+      "Superman uses his laserbeams from his eyes, leaving initial 15 damage and the target burns for 2 turns, 5 damage each turn!",
+      "Superman blows his superhuman breath on every enemy! Deals 10 damage to all enemies.",
+      "Superman flies to the sun and becomes invulnerable for one turn, removes all debuffs!",      
+      "Batman punches with the force of all his anger and desperation! Deals 20 damage to its target.",
+      "Batman throws his Batwing and stuns for one turn!",
+      "Batman calls Robin, together they punch even harder! Deals 30 damage to its target.",
+      "Batman uses his grapple to get out of a fight, becomes unattackable for one turn and removes all debuffs!",
+      "Ironman shoots Highenergybeam from his Hand! Dealing 15 damage to its target",
+      "Ironman calls his suits to protect someone on the team. Applies 15 damage reduction to an ally for 1 turn!",
+      "Ironman flies really fast and punches the enemy! Deals 35 damage to his target.",
+      "Ironman calls his thickest indestructable armored suit, becomes invulnerable for one turn and removes all debuffs!",
+      "Superman flies towards the enemie and throws a punch. Wow what a punch! Deals 25 damage to its target.",
+      "Superman uses his laserbeams from his eyes, leaving initial 15 damage and the target burns for 2 turns, 5 damage each turn!",
+      "Superman blows his superhuman breath on every enemy! Deals 10 damage to all enemies.",
       "Superman flies to the sun and becomes invulnerable for one turn, removes all debuffs!"
     ];
     this.avatarDescription = [
+      "Batman has a dark past, has a cave of gadgets and fights crime!",
+      "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits and gets all the ladies!",
+      "Superman, disguises himself as human in the form of Clark Kent, he comes from another planet and has superhuman skills thanks to our yellow Sun!",
       "Batman has a dark past, has a cave of gadgets and fights crime!",
       "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits and gets all the ladies!",
       "Superman, disguises himself as human in the form of Clark Kent, he comes from another planet and has superhuman skills thanks to our yellow Sun!"
@@ -184,9 +199,9 @@ class IronHackGame {
           this.players[savedAvatar.split("")[0]].chosenAvatar = savedAvatar.split("")[1];
           this.fightSequenceElement.push(this.players[savedAvatar.split("")[0]].chosenAvatar);
           if (this.turn === 0) {
-            this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]);
+            this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(JSON.parse(JSON.stringify(this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])])));
           } else {
-            this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]);
+            this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(JSON.parse(JSON.stringify(this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])])));
           }
         }
         this.fightSequence.push(this.fightSequenceElement);
@@ -323,11 +338,8 @@ class Char {
           this.isActive = this.beeingAttacked.rounds;
           this.beeingAttacked.rounds -= 1;
       }
-      let onlyStillActiveEffekts = this.beeingAttacked.filter((skills) => {
-        return skills.rounds > 0;
-
-      })
-      this.beeingAttacked = onlyStillActiveEffekts;
+      this.beeingAttacked = this.beeingAttacked.filter((skills) => {return skills.rounds > 0;})
+       
     }
 
   }

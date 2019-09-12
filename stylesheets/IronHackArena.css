@@ -106,10 +106,50 @@ p {
 #mouseOverDiv {
   display: flex;
   justify-content: center;
-  align-content: flex-end;
+  align-items: center;
   position: static;
   color: white;
   font-weight: bold;
   font-size: 1.5em;
   opacity: 1;
+  background-size: 2em;
+  background-color: blue;
+}
+
+.redResources {
+  background-image: url("file://h:/projekte/ironhackarena/img/neutralResource.jpg");
+  background-size: 80px;
+  position: relative;
+  color: white;
+  font-weight: bold;
+}
+
+.yellowResources {
+  background-image: url("file://h:/projekte/ironhackarena/img/neutralResource.jpg");
+  background-size: 80px;
+  position: relative;
+  color: white;
+  font-weight: bold;
+}
+
+.blueResources {
+  background-image: url("file://h:/projekte/ironhackarena/img/neutralResource.jpg");
+  background-size: 80px;
+  position: relative;
+  color: white;
+  font-weight: bold;
+}
+.whiteResources {
+  background-image: url("file://h:/projekte/ironhackarena/img/neutralResource.jpg");
+  background-size: 80px;
+  position: relative;
+  color: white;
+  font-weight: bold;
+}
+.totalResources {
+  background-image: url("file://h:/projekte/ironhackarena/img/neutralResource.jpg");
+  background-size: 80px;
+  position: relative;
+  color: white;
+  font-weight: bold;
 }
