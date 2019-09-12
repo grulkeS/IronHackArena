@@ -163,7 +163,7 @@ class IronHackGame {
 
   addEventhandlerToAllSkills() {
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
-      this.skillNumbers[i].onclick = (e) => {
+      this.skillNumbers[i].onclick = () => {
         if (this.state === "choosingSkills") {
           let savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
           if (this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill === "") {
@@ -199,9 +199,9 @@ class IronHackGame {
           this.players[savedAvatar.split("")[0]].chosenAvatar = savedAvatar.split("")[1];
           this.fightSequenceElement.push(this.players[savedAvatar.split("")[0]].chosenAvatar);
           if (this.turn === 0) {
-            this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(JSON.parse(JSON.stringify(this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])])));
+            this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]});
           } else {
-            this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push(JSON.parse(JSON.stringify(this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])])));
+            this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])]});
           }
         }
         this.fightSequence.push(this.fightSequenceElement);
