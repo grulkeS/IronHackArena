@@ -17,6 +17,25 @@ class IronHackGame {
     document.getElementById("10_health").value = this.players[1].characters[0].health;
     document.getElementById("11_health").value = this.players[1].characters[1].health;
     document.getElementById("12_health").value = this.players[1].characters[2].health;
+    this.skillDescriptions = [
+      "Batman punches with the force of all his anger and desperation!",
+      "Batman throws his Batwing and stuns you for one turn!",
+      "Batman calls Robin, together they punch even harder!",
+      "Batman uses his grapple to get out of a fight, becomes unattackable for one turn and removes all debuffs!",
+      "Ironman shoots Highenergybeam from his Hand!",
+      "Ironman calls his suits to protect everyone for 15 damage reduction!",
+      "Ironman flies really fast and punches you!",
+      "Ironman calls his thickest indestructable armored suit, becomes invulnerable for one turn and removes all debuffs!",
+      "Superman flies towards you and punches you. Wow what a punch!",
+      "Superman uses his laserbeams from his eyes, leaving initial damage and you burn for 2 turns, 5 damage each turn!",
+      "Superman blows his superhuman breath on every enemy!",
+      "Superman flies to the sun and becomes invulnerable for one turn, removes all debuffs!"
+    ];
+    this.avatarDescription = [
+      "Batman has a dark past, has a cave of gadgets and fights crime!",
+      "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits and gets all the ladies!",
+      "Superman, disguises himself as human in the form of Clark Kent, he comes from another planet and has superhuman skills thanks to our yellow Sun!"
+    ]
     //this.choosingSkill=this.choosingSkill.bind(this);
     //document.getElementById("player"+this.turn+"Name").innerHTML=this.players[this.turn].playerName+ " ist jetzt dran";
     //document.getElementById("player" + this.turn + "Chars").id = ("player" + this.turn + "CharsActive");
@@ -30,6 +49,8 @@ class IronHackGame {
     this.avatarp1 = document.getElementsByClassName("p1avatar");
     this.addEventhandlerToAllSkills();
     this.addEventhandlerToAllAvatars();
+    this.addMouseOverToAllSkills();
+    this.addMouseOverToAllAvatars()
   }
   updateDOM() {
     if (this.state === "start") {
@@ -56,7 +77,15 @@ class IronHackGame {
     document.getEle mentById("startGameButton").innerHTML="Next Round";
     document.getElementById("startGameButton").id="nextRound";
   }*/
-
+  checkAvailability() {
+    if (this.state === "start") {
+      document.getElementsByClassName("gameArea")[0].style.opacity = 0.5;
+    } else if (this.state === "choosingSkills") {
+      this.selectedSkillsStyling();
+    } else if (this.state === "skillChosen") {
+      this.selectedSkillsStyling();
+    }
+  }
   getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -161,7 +190,20 @@ class IronHackGame {
       }
     }//this.choosingAvatar();
   }
-
+  addMouseOverToAllSkills() {
+    for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
+      this.skillNumbers[i].onmouseover = () => {
+        document.getElementById("mouseoverText").innerHTML = this.skillDescriptions[i];
+      }
+    }
+  }
+  addMouseOverToAllAvatars() {
+    for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
+      this.avatarTarget[i].onmouseover = () => {
+        document.getElementById("mouseoverText").innerHTML = this.avatarDescription[i];
+      }
+    }
+  }
   addEventhandlerToAllAvatars() {
     console.log(this.avatarTarget);
     for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
@@ -283,10 +325,10 @@ class Char {
     this.beeingBuffed = [];
     this.isInvulnerable = 0;
     this.skills = [
-      { type: "damage", value: 10 },
-      { type: "healSomeOne", value: 10 },
-      { type: "DoT", value: 5 },
-      { type: "invulnerable", value: 1 }
+      { type: "damage", value: 10, rounds: 1 },
+      { type: "heal", value: 10, rounds: 1 },
+      { type: "dot", value: 5, rounds: 2 },
+      { type: "invulnerable", value: 1, rounds: 1 }
     ];
   }
 
@@ -302,6 +344,7 @@ class Char {
           this.beeingAttacked.rounds -= 1;
           break;
         case "invulnerable":
+          this.beeingAttacked = [];
           this.invulnerable = 1;
           this.beeingAttacked.rounds -= 1;
           break;
@@ -314,9 +357,9 @@ class Char {
           this.isActive = this.beeingAttacked.rounds;
           this.beeingAttacked.rounds -= 1;
       }
-      let onlyStillActiveEffekts = this.beeingAttacked.filter((rounds) => {
-        return rounds.rounds > 0;
-        
+      let onlyStillActiveEffekts = this.beeingAttacked.filter((skills) => {
+        return skills.rounds > 0;
+
       })
       this.beeingAttacked = onlyStillActiveEffekts;
       console.log(this.beeingAttacked);

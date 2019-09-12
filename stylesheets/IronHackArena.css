@@ -58,9 +58,7 @@ p {
   text-align: right; 
 }
 
-.charFaceAndSkillDiv {
-  size: 20em;
-}
+
 .resourceTitel div{
   display: flex;
   justify-content: center;
@@ -84,8 +82,8 @@ p {
 }
 #startGameButton button {
   height: 3em;
-  width: 10em;
-  font-size: 2em;
+  width: 7em;
+  font-size: 1em;
   color: blue;
   background-color: beige;
 }
@@ -104,4 +102,9 @@ p {
   justify-content: space-around;
   margin: 3em;
   opacity: 0.8
+}
+#mouseOverDiv {
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
 }
