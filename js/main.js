@@ -8,7 +8,6 @@ startButton.onclick = () => {
   //console.log(document.getElementsByName("startGame")[0].innerHTML);
   if (document.getElementsByName("startGame")[0].innerHTML === "Start Game") {
     document.getElementsByName("startGame")[0].innerHTML = "Next Round"
-
   } else {
     for (i = 0; i <= game.players[game.turn].characters.length - 1; i++) {
       //game.players[game.turn].characters[i].chosenSkill = "";
@@ -17,16 +16,11 @@ startButton.onclick = () => {
       }
     }
     document.getElementsByName("startGame")[0].onclick = game.nextRound();
-    console.log(game.fightSequence);
-    console.log(game.players);
   }
   game.state = "choosingSkills";
-  //  game.changeGameButton();
-  console.log(game.skillNumbers);
-  
+  //  game.changeGameButton();  
   game.updateDOM();
 }
-console.log(game.state)
 /*function getActivePlayer () {
   game.players[game.turn];
   if(game.players[game.turn].status === "inactive"){
