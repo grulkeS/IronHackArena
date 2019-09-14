@@ -137,17 +137,20 @@ class IronHackGame {
   newStylingFrameWork() {
     this.idArray.forEach((coord) => {
       console.log(this.players[coord[0]].characters[coord[1]].health);
-      console.log(document.getElementById(""+ coord[0] + coord[1] + "_health"));
-      document.getElementById(""+ coord[0] + coord[1] + "_health").value = this.players[coord[0]].characters[coord[1]].health;
+      console.log(document.getElementById("" + coord[0] + coord[1] + "_health"));
+      document.getElementById("" + coord[0] + coord[1] + "_health").value = this.players[coord[0]].characters[coord[1]].health;
     })
     switch (this.state) {
 
       case "choosingSkills":
         document.getElementsByClassName("gameArea")[0].style.opacity = 1;
-        this.idArray.forEach((coord)=>{
+
+
+        this.idArray.forEach((coord) => {
           document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "";
         })
         if (this.turn === 0) {
+
           this.idArray.forEach((coord) => {
             if (coord[0] === 0) {
               if (this.players[0].characters[coord[1]].skills[coord[2]].isAvailable === 0 && this.players[0].characters[coord[1]].chosenSkill === ""/*&& checkResources()=== true*/) {
@@ -158,6 +161,7 @@ class IronHackGame {
             }
           })
         } else if (this.turn === 1) {
+
           this.idArray.forEach((coord) => {
 
             if (coord[0] === 1) {
@@ -357,17 +361,37 @@ class IronHackGame {
 
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
       this.skillNumbers[i].onclick = () => {
+        let savedSkill;
         if (this.state === "choosingSkills") {
-          let savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
+          switch (this.turn) {
+            case 0:
+              savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
+              if (parseInt(savedSkill.split("")[0]) === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isActive === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].skills[parseInt(savedSkill.split("")[2])].isAvailable === 0) {
+                if (this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill === "") {
+                  this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill = savedSkill.split("")[2];
+                  this.fightSequenceElement = [];
+                  this.fightSequenceElement.push(savedSkill.split("")[1]);
+                  this.fightSequenceElement.push(savedSkill.split("")[2]);
+                  this.state = "skillChosen";
+                  this.updateDOM();
+                }
+              } else { return; }
+              break;
 
-          if (this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill === "") {
-            this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill = savedSkill.split("")[2];
-            this.fightSequenceElement = [];
-            this.fightSequenceElement.push(savedSkill.split("")[1]);
-            this.fightSequenceElement.push(savedSkill.split("")[2]);
-            this.state = "skillChosen";
-            this.updateDOM();
-          } else { return; }
+            case 1:
+              savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
+              if (parseInt(savedSkill.split("")[0]) === 1 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isActive === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].skills[parseInt(savedSkill.split("")[2])].isAvailable === 0) {
+                if (this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill === "") {
+                  this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill = savedSkill.split("")[2];
+                  this.fightSequenceElement = [];
+                  this.fightSequenceElement.push(savedSkill.split("")[1]);
+                  this.fightSequenceElement.push(savedSkill.split("")[2]);
+                  this.state = "skillChosen";
+                  this.updateDOM();
+                }
+              } else { return; }
+              break;
+          }
         }
       }
     }//this.choosingAvatar();
@@ -375,23 +399,41 @@ class IronHackGame {
   addEventhandlerToAllAvatars() {
     for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
       this.avatarTarget[i].onclick = () => {
+        let savedAvatar;
         if (this.state === "choosingAvatars") {
-          let savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
-          console.log(savedAvatar);
-          this.players[savedAvatar.split("")[0]].chosenAvatar = savedAvatar.split("")[1];
-          this.fightSequenceElement.push(savedAvatar.split("")[1]);
-          if (this.turn === 0) {
-            this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
-          } else {
-            this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+          switch (this.turn) {
+            case 0:
+              savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
+              if (this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "opponent" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+              } else if (this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "allied" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+              }
+              this.fightSequence.push(this.fightSequenceElement);
+              this.state = "avatarChosen";
+              this.updateDOM();
+              break;
+            case 1:
+              savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
+              if (this.players[1].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "opponent" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+              } else if (this.players[1].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "allied" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+              }
+              this.fightSequence.push(this.fightSequenceElement);
+              this.state = "avatarChosen";
+              this.updateDOM();
+              break;
           }
         }
-        this.fightSequence.push(this.fightSequenceElement);
-        this.state = "avatarChosen";
-        this.updateDOM();
       }
     }
   }
+
 
   /*whoStartsFirst() {
 

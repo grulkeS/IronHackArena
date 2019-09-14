@@ -39,7 +39,7 @@ p {
 
 .chars {
   margin: 1em;
-  
+  background-color: blue;
 }
 
 #player1 span, #player2 span {
@@ -47,6 +47,7 @@ p {
   font-weight: bold;
   background-color: black;
   z-index: 8;
+  opacity: 1;
 }
 
 .playerName {
