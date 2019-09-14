@@ -135,10 +135,18 @@ class IronHackGame {
     ];
   */
   newStylingFrameWork() {
+    this.idArray.forEach((coord) => {
+      console.log(this.players[coord[0]].characters[coord[1]].health);
+      console.log(document.getElementById(""+ coord[0] + coord[1] + "_health"));
+      document.getElementById(""+ coord[0] + coord[1] + "_health").value = this.players[coord[0]].characters[coord[1]].health;
+    })
     switch (this.state) {
 
       case "choosingSkills":
         document.getElementsByClassName("gameArea")[0].style.opacity = 1;
+        this.idArray.forEach((coord)=>{
+          document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "";
+        })
         if (this.turn === 0) {
           this.idArray.forEach((coord) => {
             if (coord[0] === 0) {
@@ -151,10 +159,10 @@ class IronHackGame {
           })
         } else if (this.turn === 1) {
           this.idArray.forEach((coord) => {
-            console.log(coord);
+
             if (coord[0] === 1) {
               if (this.players[1].characters[coord[1]].skills[coord[2]].isAvailable === 0 /*&& checkResources()=== true*/) {
-                console.log(document.getElementById("" + coord[0] + coord[1] + coord[2]));
+
                 document.getElementById("" + coord[0] + coord[1] + coord[2]).parentNode.style.opacity = 1;
               }
             }
@@ -190,7 +198,7 @@ class IronHackGame {
             } else if (this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "allied") {
               this.idArray.forEach((coord) => {
                 if (coord[0] === 0) {
-                  if (this.players[0].characters[coord[1]].isInvulnerable === 0 && this.players[0].characters[coord[1]].isActive === 0) {
+                  if (this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].isActive === 0) {
                     document.getElementById("" + coord[0] + coord[1]).parentNode.style.opacity = 1;
                   }
                 }
@@ -229,19 +237,18 @@ class IronHackGame {
 
       case "avatarChosen":
         this.state = "choosingSkills";
-        console.log(this.players);
+
         if (this.turn === 0) {
           this.idArray.forEach((coord) => {
             if (coord[0] === 0) {
-              console.log(coord);
-              console.log(this.fightSequenceElement);
+
               if (this.players[coord[0]].characters[coord[1]].isActive === 0 && this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].chosenSkill === "") {
-                console.log(document.getElementById("" + coord[0] + coord[1] + coord[2]).parentNode);
+
                 document.getElementById("" + coord[0] + coord[1] + coord[2]).parentNode.style.opacity = 1;
               }
             }
           })
-        }else if( this.turn === 1){
+        } else if (this.turn === 1) {
           this.idArray.forEach((coord) => {
             if (coord[0] === 1) {
               if (this.players[coord[0]].characters[coord[1]].isActive === 0 && this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].chosenSkill === "") {
@@ -250,7 +257,6 @@ class IronHackGame {
             }
           })
         }
-        this.fightSequenceElement = [];
         break;
     }
 
@@ -332,24 +338,7 @@ class IronHackGame {
      }
    }*/
 
-  addEventhandlerToAllSkills() {
-    for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
-      this.skillNumbers[i].onclick = () => {
-        if (this.state === "choosingSkills") {
-          let savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
-          console.log(savedSkill);
-          if (this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill === "") {
-            this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill = savedSkill.split("")[2];
-            this.fightSequenceElement = [];
-            this.fightSequenceElement.push(savedSkill.split("")[1]);
-            this.fightSequenceElement.push(savedSkill.split("")[2]);
-            this.state = "skillChosen";
-            this.updateDOM();
-          } else { return; }
-        }
-      }
-    }//this.choosingAvatar();
-  }
+
   addMouseOverToAllSkills() {
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
       this.skillNumbers[i].onmouseover = () => {
@@ -363,6 +352,25 @@ class IronHackGame {
         document.getElementById("mouseoverText").innerHTML = this.avatarDescription[i];
       }
     }
+  }
+  addEventhandlerToAllSkills() {
+
+    for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
+      this.skillNumbers[i].onclick = () => {
+        if (this.state === "choosingSkills") {
+          let savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
+
+          if (this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill === "") {
+            this.players[savedSkill.split("")[0]].characters[savedSkill.split("")[1]].chosenSkill = savedSkill.split("")[2];
+            this.fightSequenceElement = [];
+            this.fightSequenceElement.push(savedSkill.split("")[1]);
+            this.fightSequenceElement.push(savedSkill.split("")[2]);
+            this.state = "skillChosen";
+            this.updateDOM();
+          } else { return; }
+        }
+      }
+    }//this.choosingAvatar();
   }
   addEventhandlerToAllAvatars() {
     for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
@@ -480,46 +488,53 @@ class Char {
     this.isInvulnerable = 0;
     this.playerID = "";
     this.skills = [
-      { type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0 },
-      { type: "heal", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0 },
-      { type: "dot", value: 5, rounds: 2, viableTarget: "allied", coolDown: 2, isAvailable: 0 },
-      { type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0 }
+      { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0 },
+      { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0 },
+      { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0 },
+      { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0 }
     ];
   }
 
-  recieveDamageAndTypeStateChanges() {
-    if (this.isActive !== 0) {
-      this.isActive -= 1;
-    }
-    for (i = 0; i <= this.beeingAttacked.length - 1; i++) {
-      switch (type) {
-        case "damage":
-          this.health -= this.beeingAttacked.value;
-          this.beeingAttacked.rounds -= 1;
-          break;
-        case "heal":
-          this.health += this.beeingAttacked.value;
-          this.beeingAttacked.rounds -= 1;
-          break;
-        case "invulnerable":
-          this.beeingAttacked = [];
-          this.invulnerable = 1;
-          this.beeingAttacked.rounds -= 1;
-          this.isActive = 1;
-          break;
-        case "dot":
-          this.health -= value;
-          this.beeingAttacked.rounds -= 1;
-          break;
-        case "stun":
-          this.health -= this.beeingAttacked.value;
-          this.isActive = this.beeingAttacked.rounds;
-          this.beeingAttacked.rounds -= 1;
+  recieveDamageAndTypeStateChanges(kind = "defense") {
+
+    if (kind === "offense") {
+      if (this.isActive !== 0) {
+        this.isActive -= 1;
       }
-      this.beeingAttacked = this.beeingAttacked.filter((skills) => { return skills.rounds > 0; })
-
+      for (let i = 0; i <= this.beeingAttacked.length - 1; i++) {
+        switch (this.beeingAttacked[i].type) {
+          case "damage":
+            this.health -= this.beeingAttacked[i].value;
+            this.beeingAttacked[i].rounds -= 1;
+            break;
+          case "dot":
+            this.health -= this.beeingAttacked[i].value;
+            this.beeingAttacked[i].rounds -= 1;
+            break;
+          case "stun":
+            this.health -= this.beeingAttacked[i].value;
+            this.isActive = this.beeingAttacked[i].rounds;
+            this.beeingAttacked[i].rounds -= 1;
+        }
+      }
+      this.beeingAttacked = this.beeingAttacked.filter((skills) => { return skills.rounds > 0; });
+    } else {
+      for (let i = 0; i <= this.beeingAttacked.length - 1; i++) {
+        switch (this.beeingAttacked[i].type) {
+          case "heal":
+            this.health += this.beeingAttacked[i].value;
+            this.beeingAttacked[i].rounds -= 1;
+            break;
+          case "invulnerable":
+            this.beeingAttacked = [];
+            this.invulnerable = 1;
+            this.beeingAttacked[i].rounds -= 1;
+            this.isActive = 1;
+            break;
+        }
+      }
+      this.beeingAttacked = this.beeingAttacked.filter((skills) => { return skills.rounds > 0; });
     }
-
   }
 }
 

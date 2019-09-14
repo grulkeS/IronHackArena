@@ -6,7 +6,22 @@ startButton.onclick = () => {
   if (document.getElementsByName("startGame")[0].innerHTML === "Start Game") {
     document.getElementsByName("startGame")[0].innerHTML = "Next Round"
   } else {
-    for (i = 0; i <= game.players[game.turn].characters.length - 1; i++) {
+    if(game.turn === 0){
+      game.players[0].characters.forEach((character) => {
+        character.recieveDamageAndTypeStateChanges();
+      })
+      game.players[1].characters.forEach((character) => {
+        character.recieveDamageAndTypeStateChanges("offense");
+      })
+    }else{
+      game.players[1].characters.forEach((character) => {
+        character.recieveDamageAndTypeStateChanges();
+      })
+      game.players[0].characters.forEach((character) => {
+        character.recieveDamageAndTypeStateChanges("offense");
+      })
+    }
+    for (let i = 0; i <= game.players[game.turn].characters.length - 1; i++) {
       if (game.players[game.turn].characters[i].chosenSkill !== "") {
         game.players[game.turn].characters[i].chosenSkill = "";
       }

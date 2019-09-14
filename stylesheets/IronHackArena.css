@@ -2,6 +2,7 @@ html {
   background: url("../img/background.jpg") no-repeat;
   background-size: cover;
   font-family: "Helvetica Neue", Arial, sans-serif;
+  z-index: 1;
 }
 
 
@@ -33,6 +34,7 @@ p {
   display: flex;
   justify-content: space-around;
   margin: 3em;
+  z-index: 5;
 }
 
 .chars {
@@ -43,6 +45,8 @@ p {
 #player1 span, #player2 span {
   color: white;
   font-weight: bold;
+  background-color: black;
+  z-index: 8;
 }
 
 .playerName {
@@ -152,4 +156,14 @@ p {
   position: relative;
   color: white;
   font-weight: bold;
+}
+.skills img{
+  height: 80px;
+  width: 100px;
+  border-spacing: 2px;
+  border-color: white;
+}
+.avatar img{
+  height: 120px;
+  width: 100px;
 }
