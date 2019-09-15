@@ -90,7 +90,20 @@ class IronHackGame {
     //this.addMouseOverToAllSkills();
     //this.addMouseOverToAllAvatars()
   }
+  /*checkCharactersHealth() {
+    for(let i=0;i<=this.players.length-1;i++){
+      this.players[i].characters.forEach((char) => {
+        if(char.health === 0){
+          alert(`Player ${this.players[i]} has won, good job!`)
+        }else{
+          this.state = "choosingSkills";
+          this.nextRound();
+          game.updateDOM();
+        }
+      })
+    }
 
+  }*/
   updateDOM() {
     if (this.state === "start") {
       document.getElementsByClassName("gameArea")[0].style.opacity = 0.5;
@@ -208,10 +221,16 @@ class IronHackGame {
                   if (this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].isActive === 0 && this.players[coord[0]].characters[coord[1]].health >= 1) {
                     document.getElementById("" + coord[0] + coord[1]).parentNode.style.opacity = 1;
                   }
-                } else if (this.players[coord[0]].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "self") {
-                  document.getElementById("" + 0 + this.fightSequenceElement[0]).parentNode.style.opacity = 1;
                 }
               })
+            } else if (this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "self") {
+              this.idArray.forEach((coord) => {
+                if (coord[0] === 0) {
+                  if (this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].isActive === 0) {
+                    document.getElementById("" + 0 + this.fightSequenceElement[0]).parentNode.style.opacity = 1;
+                  }
+                }
+              });
             }
             break;
 
@@ -236,11 +255,10 @@ class IronHackGame {
               this.idArray.forEach((coord) => {
                 if (coord[0] === 1) {
                   if (this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].isActive === 0) {
-                    document.getElementById("" + 1 + this.fightSequenceElement[0]).parentNode.style.opacity = 1
+                    document.getElementById("" + 1 + this.fightSequenceElement[0]).parentNode.style.opacity = 1;
                   }
                 }
-              })
-                ;
+              });
             }
             break;
         }
@@ -261,7 +279,6 @@ class IronHackGame {
             if (coord[0] === 0) {
 
               if (this.players[coord[0]].characters[coord[1]].isActive === 0 && this.players[coord[0]].characters[coord[1]].isInvulnerable === 0 && this.players[coord[0]].characters[coord[1]].chosenSkill === "" && this.players[coord[0]].characters[coord[1]].health >= 1) {
-
                 document.getElementById("" + coord[0] + coord[1] + coord[2]).parentNode.style.opacity = 1;
               }
             }
