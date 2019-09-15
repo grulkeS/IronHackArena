@@ -9,6 +9,7 @@ class IronHackGame {
     this.state = "start";
     this.fightSequence = [];
     this.fightSequenceElement = [];
+    this.savedPlayer;
     document.getElementById("player0Name").innerHTML = this.players[0].playerName;
     document.getElementById("player1Name").innerHTML = this.players[1].playerName;
     document.getElementById("00_health").value = this.players[0].characters[0].health;
@@ -382,6 +383,8 @@ class IronHackGame {
               if (parseInt(savedSkill.split("")[0]) === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isActive === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isInvulnerable === 0) {
                 if (this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill === "") {
                   this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill = savedSkill.split("")[2];
+                  this.savedPlayer = "";
+                  this.savedPlayer = savedSkill.split("")[0];
                   this.fightSequenceElement = [];
                   this.fightSequenceElement.push(savedSkill.split("")[1]);
                   this.fightSequenceElement.push(savedSkill.split("")[2]);
@@ -396,6 +399,8 @@ class IronHackGame {
               if (parseInt(savedSkill.split("")[0]) === 1 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isActive === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].skills[parseInt(savedSkill.split("")[2])].isAvailable === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].health >= 1 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isInvulnerable === 0) {
                 if (this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill === "") {
                   this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill = savedSkill.split("")[2];
+                  this.savedPlayer = "";
+                  this.savedPlayer = savedSkill.split("")[0];
                   this.fightSequenceElement = [];
                   this.fightSequenceElement.push(savedSkill.split("")[1]);
                   this.fightSequenceElement.push(savedSkill.split("")[2]);
@@ -421,19 +426,14 @@ class IronHackGame {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
               } else if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "allied" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
-                console.log(this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable);
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
-              } else if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "self" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isActive === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
+              } else if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "self" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isActive === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1 && this.players[0].characters[parseInt(this.fightSequenceElement[0])] === this.players[0].characters[parseInt(savedAvatar.split("")[1])]) {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+                this.players[0].characters[parseInt(this.fightSequenceElement[2])].recieveDamageAndTypeStateChanges();
               } else {
-                this.players.forEach((player) => {
-                  player.characters.forEach((character) => {
-                    character.chosenSkill = "";
-                  })
-                });
-                savedAvatar = "";
+                this.players[parseInt(this.savedPlayer)].characters[parseInt(this.fightSequenceElement[0])].chosenSkill = "";
                 this.state = "choosingSkills";
                 this.updateDOM();
               }
@@ -447,21 +447,14 @@ class IronHackGame {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
               } else if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "allied" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
-                
-                  this.fightSequenceElement.push(savedAvatar.split("")[1]);
-                  this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
-                
-              } else if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "self" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isActive === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+              } else if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "self" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isActive === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1 && this.players[1].characters[parseInt(this.fightSequenceElement[0])] === this.players[1].characters[parseInt(savedAvatar.split("")[1])]) {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+                this.players[1].characters[parseInt(this.fightSequenceElement[2])].recieveDamageAndTypeStateChanges();
               } else {
-
-                this.players.forEach((player) => {
-                  player.characters.forEach((character) => {
-                    character.chosenSkill = "";
-                  })
-                });
-                savedAvatar = "";
+                this.players[parseInt(this.savedPlayer)].characters[parseInt(this.fightSequenceElement[0])].chosenSkill = "";
                 this.state = "choosingSkills";
                 this.updateDOM();
               }
