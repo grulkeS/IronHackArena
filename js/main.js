@@ -1,5 +1,13 @@
 
-let game = new IronHackGame();
+let batman = new Char("Batman", skillArrBatman);
+let ironman = new Char("Ironman", skillArrIronman);
+let superman = new Char("Superman", skillArrSuperman);
+let player0 = new Player("Red Ninja", [batman, ironman, superman]);
+let player1 = new Player("Blue Toas", [batman, ironman, superman]);
+let game = new IronHackGame([player0,player1]);
+
+
+
 game.updateDOM();
 startButton = document.getElementById("startGameButton");
 startButton.onclick = () => {

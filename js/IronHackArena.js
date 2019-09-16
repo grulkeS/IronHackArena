@@ -1,10 +1,25 @@
+const skillArrBatman = [
+  { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanpunch.jpg" },
+  { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanbatwing.jpg" },
+  { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/batmanrobin.jpg" },
+  { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/batmangrapplegun.jpg" }
+];
+const skillArrIronman = [
+  { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanhandbeam.jpg" },
+  { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanallsuits.jpg" },
+  { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/ironmanpunch.jpg" },
+  { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/ironmanheavyarmor.jpg" }
+];
+const skillArrSuperman = [
+  { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/supermanpunch.jpg" },
+  { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/supermanlasereyes.jpg" },
+  { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/supermanbreath.jpg" },
+  { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/supermansun.jpg" }
+];
 
 class IronHackGame {
-  constructor() {
-    this.players = [
-      new Player("Red Ninja"),
-      new Player("Blue Toast")
-    ];
+  constructor(playersArray) {
+    this.players = playersArray;
     this.turn = 0;
     this.state = "start";
     this.fightSequence = [];
@@ -46,10 +61,10 @@ class IronHackGame {
     ];
     this.avatarDescription = [
       "Batman has a dark past, has a cave of gadgets and fights crime!",
-      "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits and gets all the ladies!",
+      "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits!",
       "Superman, disguises himself as human in the form of Clark Kent, he comes from another planet and has superhuman skills thanks to our yellow Sun!",
       "Batman has a dark past, has a cave of gadgets and fights crime!",
-      "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits and gets all the ladies!",
+      "Ironman, also known as Tony Stark, is a genius engineer fighting with futuretech armored Suits!",
       "Superman, disguises himself as human in the form of Clark Kent, he comes from another planet and has superhuman skills thanks to our yellow Sun!"
     ]
 
@@ -87,8 +102,8 @@ class IronHackGame {
     this.avatarp1 = document.getElementsByClassName("p1avatar");
     this.addEventhandlerToAllSkills();
     this.addEventhandlerToAllAvatars();
-    //this.addMouseOverToAllSkills();
-    //this.addMouseOverToAllAvatars()
+    this.addMouseOverToAllSkills();
+    this.addMouseOverToAllAvatars()
   }
   /*checkCharactersHealth() {
     for(let i=0;i<=this.players.length-1;i++){
@@ -160,7 +175,7 @@ class IronHackGame {
 
         if (this.turn === 0) {
           this.idArray.forEach((coord) => {
-            document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "";
+            document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "none";
             document.getElementById("" + coord[0] + coord[1]).parentNode.style.opacity = 0.7;
           });
           this.idArray.forEach((coord) => {
@@ -175,7 +190,7 @@ class IronHackGame {
           })
         } else if (this.turn === 1) {
           this.idArray.forEach((coord) => {
-            document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "";
+            document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "none";
             document.getElementById("" + coord[0] + coord[1]).parentNode.style.opacity = 0.7;
           });
           this.idArray.forEach((coord) => {
@@ -268,12 +283,15 @@ class IronHackGame {
         break;
 
       case "avatarChosen": // reset styling and set styling to show only still available skills to choose from
-        this.state = "choosingSkills";
+      //attackQueueVisualizer();  
+      this.state = "choosingSkills";
         this.idArray.forEach((coord) => {
           document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "";
           document.getElementById("" + coord[0] + coord[1]).parentNode.style.opacity = 0.7;
         });
-
+        this.idArray.forEach((coord) => {
+          document.getElementsByClassName("beeingAttackedQueue" + this.players[coord[0]].characters[coord[1]].beeingAttacked)
+        })
         if (this.turn === 0) {
           this.idArray.forEach((coord) => {
             if (coord[0] === 0) {
@@ -297,6 +315,16 @@ class IronHackGame {
 
 
   }
+  /*attackQueueVisualizer(){
+    let html = "";
+    this.players.forEach((player) => {
+      player.characters.forEach((character) => {
+        character.beeingAttacked.forEach((effekt) => {
+          
+        })
+      })
+    })
+  }*/
   /* selectedSkillsStyling() {
      //checks for stage and reacts on it with styling changes in regards to selection
      switch (this.state) {
@@ -373,7 +401,7 @@ class IronHackGame {
      }
    }*/
 
-  /*
+  
     addMouseOverToAllSkills() {
       for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
         this.skillNumbers[i].onmouseover = () => {
@@ -387,7 +415,7 @@ class IronHackGame {
           document.getElementById("mouseoverText").innerHTML = this.avatarDescription[i];
         }
       }
-    }*/
+    }
   addEventhandlerToAllSkills() {
 
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
@@ -502,14 +530,9 @@ class IronHackGame {
 }
 
 class Player {
-  constructor(spielerName) {
+  constructor(spielerName, charArray) {
     this.playerName = spielerName;
-    this.characters = [
-      new Char("Captain SuperDoom"),
-      new Char("Hero 74"),
-      new Char("HugMe")
-    ];
-
+    this.characters = charArray;
     this.resources = {
       red: 1,
       yellow: 1,
@@ -570,8 +593,9 @@ class Player {
 //resources hier
 
 
+
 class Char {
-  constructor(name) {
+  constructor(name, inhaltdesSkillArrays) {
     this.charName = name;
     this.health = 100;
     this.chosenSkill = "";
@@ -580,12 +604,7 @@ class Char {
     this.beeingBuffed = [];
     this.isInvulnerable = 0;
     this.playerID = "";
-    this.skills = [
-      { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0 },
-      { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0 },
-      { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0 },
-      { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0 }
-    ];
+    this.skills = inhaltdesSkillArrays;
   }
 
   recieveDamageAndTypeStateChanges(kind = "defense") {
