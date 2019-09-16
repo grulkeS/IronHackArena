@@ -2,9 +2,15 @@
 let batman = new Char("Batman", skillArrBatman);
 let ironman = new Char("Ironman", skillArrIronman);
 let superman = new Char("Superman", skillArrSuperman);
-let player0 = new Player("Red Ninja", [batman, ironman, superman]);
-let player1 = new Player("Blue Toas", [batman, ironman, superman]);
-let game = new IronHackGame([player0,player1]);
+let player0 = new Player("Red Ninja",
+  [new Char("Batman", skillArrBatman),
+  new Char("Ironman", skillArrIronman),
+  new Char("Superman", skillArrSuperman)]);
+let player1 = new Player("Blue Toas",
+  [new Char("Batman", skillArrBatman),
+  new Char("Ironman", skillArrIronman),
+  new Char("Superman", skillArrSuperman)]);
+let game = new IronHackGame([player0, player1]);
 
 
 
@@ -14,14 +20,14 @@ startButton.onclick = () => {
   if (document.getElementsByName("startGame")[0].innerHTML === "Start Game") {
     document.getElementsByName("startGame")[0].innerHTML = "Next Round"
   } else {
-    if(game.turn === 0){
+    if (game.turn === 0) {
       game.players[0].characters.forEach((character) => {
         character.recieveDamageAndTypeStateChanges();
       })
       game.players[1].characters.forEach((character) => {
         character.recieveDamageAndTypeStateChanges("offense");
       })
-    }else{
+    } else {
       game.players[1].characters.forEach((character) => {
         character.recieveDamageAndTypeStateChanges();
       })

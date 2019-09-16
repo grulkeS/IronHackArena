@@ -95,6 +95,7 @@ class IronHackGame {
       [1, 2, 3]
     ]
     this.skillNumbers = document.getElementsByClassName("skills");
+    console.log(this.skillNumbers);
     this.avatarTarget = document.getElementsByClassName("avatar");
     this.skillsp0 = document.getElementsByClassName("p0skills");
     this.skillsp1 = document.getElementsByClassName("p1skills");
@@ -421,10 +422,12 @@ class IronHackGame {
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
       this.skillNumbers[i].onclick = () => {
         let savedSkill;
+        console.log(this.turn)
         if (this.state === "choosingSkills") {
           switch (this.turn) {
             case 0:
               savedSkill = this.skillNumbers[i].getElementsByTagName("img")[0].getAttribute("id");
+              console.log(savedSkill);
               if (parseInt(savedSkill.split("")[0]) === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isActive === 0 && this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].isInvulnerable === 0) {
                 if (this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill === "") {
                   this.players[parseInt(savedSkill.split("")[0])].characters[parseInt(savedSkill.split("")[1])].chosenSkill = savedSkill.split("")[2];
