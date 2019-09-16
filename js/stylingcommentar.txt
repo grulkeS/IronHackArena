@@ -1,0 +1,75 @@
+ /* selectedSkillsStyling() {
+     //checks for stage and reacts on it with styling changes in regards to selection
+     switch (this.state) {
+       case "choosingSkills":
+         document.getElementsByClassName("gameArea")[0].style.opacity = 1;
+         for (let a = 0; a <= this.avatarTarget.length - 1; a++) {
+           this.avatarTarget[a].style.opacity = 0.7;
+         }
+         //this.avatarTarget.forEach((avatarImg) => {
+         //avatarImg.style.opacity = 0.8;
+         //});
+         for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
+           this.skillNumbers[i].style.opacity = 1;
+         }
+         //this.skillNumbers.forEach((skillImg) => {
+         //skillImg.style.opacity = 1;
+         //});
+         if (this.turn === 0) {
+           for (let i = 0; i <= this.skillsp1.length - 1; i++) {
+             document.getElementsByClassName("p1skills")[i].style.opacity = 0.7;
+           }
+         } else {
+           for (let i = 0; i <= this.skillsp0.length - 1; i++) {
+             document.getElementsByClassName("p0skills")[i].style.opacity = 0.7;
+           }
+         }
+         break;
+ 
+       case "skillChosen":
+         for (let s = 0; s <= this.skillNumbers.length - 1; s++) {
+           this.skillNumbers[s].style.opacity = 0.8;
+         }
+         //this.skillNumbers.forEach((skillImg) => {
+         //skillImg.style.opacity = 0.8;
+         //});
+         for (let i = 0; i <= this.players.length - 1; i++) {
+           for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
+             if (this.players[i].characters[j].chosenSkill !== "") {
+               document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).parentNode.style.opacity = 1;
+               document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "1";
+               //document.getElementById("selectedSkill").src="";
+             }
+           }
+         }
+         //check availability as a valid target
+         if (this.turn === 0 && this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "opponent") {
+           for (let a = 0; a <= this.avatarp1.length - 1; a++) {
+             this.players[1].characters.forEach((char) => {
+               if (char.invulnerable !== 0) {
+                 this.avatarp1[a].style.opacity = 1;
+               } else { this.avatarp1[a].style.opacity = 0.7; }
+             })
+           }
+         } else {
+           for (let a = 0; a <= this.avatarp0.length - 1; a++) {
+             this.avatarp0[a].style.opacity = 1;
+           }
+         }
+ 
+         this.state = "choosingAvatars";
+         break;
+ 
+       case "avatarChosen":
+         this.state = "choosingSkills";
+         for (let i = 0; i <= this.players.length - 1; i++) {
+           for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
+             if (this.players[i].characters[j].chosenSkill !== "") {
+               document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "";
+             }
+           }
+         }
+         this.updateDOM();
+         break;
+     }
+   }*/

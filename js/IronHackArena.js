@@ -106,20 +106,25 @@ class IronHackGame {
     this.addMouseOverToAllSkills();
     this.addMouseOverToAllAvatars()
   }
-  /*checkCharactersHealth() {
+  checkCharactersHealth() {
+    let counter;
     for(let i=0;i<=this.players.length-1;i++){
+      counter =0;
       this.players[i].characters.forEach((char) => {
         if(char.health === 0){
-          alert(`Player ${this.players[i]} has won, good job!`)
-        }else{
-          this.state = "choosingSkills";
-          this.nextRound();
-          game.updateDOM();
+          counter++;
         }
       })
+      if(counter === 3){
+        if(i===0){
+          alert("Player 2 has won! Congratulation!")
+        }else {alert("Player1 has won! Congratulations!")}
+      }
     }
-
-  }*/
+    this.state = "choosingSkills";
+    this.nextRound();
+    game.updateDOM();
+  }
   updateDOM() {
     if (this.state === "start") {
       document.getElementsByClassName("gameArea")[0].style.opacity = 0.5;
@@ -134,11 +139,7 @@ class IronHackGame {
     }
   }
 
-  //document.getElementById("player" + this.turn + "Name").innerHTML = this.players[this.turn].playerName + " ist jetzt dran";
-  /*changeGameButton(){
-    document.getEle mentById("startGameButton").innerHTML="Next Round";
-    document.getElementById("startGameButton").id="nextRound";
-  }*/
+
 
   getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -219,9 +220,7 @@ class IronHackGame {
             }
           }
         }
-
         switch (this.turn) {
-
           case 0:
             if (this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "opponent") {
               this.idArray.forEach((coord) => {
@@ -249,7 +248,6 @@ class IronHackGame {
               });
             }
             break;
-
           case 1:
             if (this.players[1].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "opponent") {
               this.idArray.forEach((coord) => {
@@ -278,14 +276,12 @@ class IronHackGame {
             }
             break;
         }
-
-
         this.state = "choosingAvatars";
         break;
 
       case "avatarChosen": // reset styling and set styling to show only still available skills to choose from
-      //attackQueueVisualizer();  
-      this.state = "choosingSkills";
+        this.attackQueueVisualizer();
+        this.state = "choosingSkills";
         this.idArray.forEach((coord) => {
           document.getElementById("" + coord[0] + coord[1] + coord[2]).border = "";
           document.getElementById("" + coord[0] + coord[1]).parentNode.style.opacity = 0.7;
@@ -313,110 +309,45 @@ class IronHackGame {
         }
         break;
     }
-
-
   }
-  /*attackQueueVisualizer(){
+  attackQueueVisualizer() {
     let html = "";
-    this.players.forEach((player) => {
-      player.characters.forEach((character) => {
-        character.beeingAttacked.forEach((effekt) => {
-          
-        })
-      })
-    })
-  }*/
-  /* selectedSkillsStyling() {
-     //checks for stage and reacts on it with styling changes in regards to selection
-     switch (this.state) {
-       case "choosingSkills":
-         document.getElementsByClassName("gameArea")[0].style.opacity = 1;
-         for (let a = 0; a <= this.avatarTarget.length - 1; a++) {
-           this.avatarTarget[a].style.opacity = 0.7;
-         }
-         //this.avatarTarget.forEach((avatarImg) => {
-         //avatarImg.style.opacity = 0.8;
-         //});
-         for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
-           this.skillNumbers[i].style.opacity = 1;
-         }
-         //this.skillNumbers.forEach((skillImg) => {
-         //skillImg.style.opacity = 1;
-         //});
-         if (this.turn === 0) {
-           for (let i = 0; i <= this.skillsp1.length - 1; i++) {
-             document.getElementsByClassName("p1skills")[i].style.opacity = 0.7;
-           }
-         } else {
-           for (let i = 0; i <= this.skillsp0.length - 1; i++) {
-             document.getElementsByClassName("p0skills")[i].style.opacity = 0.7;
-           }
-         }
-         break;
- 
-       case "skillChosen":
-         for (let s = 0; s <= this.skillNumbers.length - 1; s++) {
-           this.skillNumbers[s].style.opacity = 0.8;
-         }
-         //this.skillNumbers.forEach((skillImg) => {
-         //skillImg.style.opacity = 0.8;
-         //});
-         for (let i = 0; i <= this.players.length - 1; i++) {
-           for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
-             if (this.players[i].characters[j].chosenSkill !== "") {
-               document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).parentNode.style.opacity = 1;
-               document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "1";
-               //document.getElementById("selectedSkill").src="";
-             }
-           }
-         }
-         //check availability as a valid target
-         if (this.turn === 0 && this.players[0].characters[this.fightSequenceElement[0]].skills[this.fightSequenceElement[1]].viableTarget === "opponent") {
-           for (let a = 0; a <= this.avatarp1.length - 1; a++) {
-             this.players[1].characters.forEach((char) => {
-               if (char.invulnerable !== 0) {
-                 this.avatarp1[a].style.opacity = 1;
-               } else { this.avatarp1[a].style.opacity = 0.7; }
-             })
-           }
-         } else {
-           for (let a = 0; a <= this.avatarp0.length - 1; a++) {
-             this.avatarp0[a].style.opacity = 1;
-           }
-         }
- 
-         this.state = "choosingAvatars";
-         break;
- 
-       case "avatarChosen":
-         this.state = "choosingSkills";
-         for (let i = 0; i <= this.players.length - 1; i++) {
-           for (let j = 0; j <= this.players[i].characters.length - 1; j++) {
-             if (this.players[i].characters[j].chosenSkill !== "") {
-               document.getElementById("" + i + j + this.players[i].characters[j].chosenSkill).border = "";
-             }
-           }
-         }
-         this.updateDOM();
-         break;
-     }
-   }*/
-
-  
-    addMouseOverToAllSkills() {
-      for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
-        this.skillNumbers[i].onmouseover = () => {
-          document.getElementById("mouseoverText").innerHTML = this.skillDescriptions[i];
+    /*for (let i = 0; i <= this.players[0].characters[0].beeingAttacked.length - 1; i++) {
+      console.log(this.players[0].characters[0]);
+      if(this.players[0].characters[0].beeingAttacked[i] !== ""){
+        html += '<div><img src="' + this.players[0].characters[0].beeingAttacked[i].imgPath + '" alt="SkillImage" style="width:30px;height:30px;" ></div>';
+      }
+      else {return;}
+      //<img src="./img/selectedSkill.jpg" alt="selected Skill" id="005">
+    }*/
+    for(let player=0;player<=this.players.length-1;player++){
+      for(let character=0;character<=this.players[player].characters.length-1;character++){
+        for(let skill=0;skill<=this.players[player].characters[character].beeingAttacked.length-1;skill++){
+          console.log(document.getElementById("beeingAttackedQueue" + player + character).innerHTML);
+          if(this.players[player].characters[character].beeingAttacked !== ""){
+            html += '<div><img src="' + this.players[player].characters[character].beeingAttacked[skill].imgPath + '" alt="SkillImage" style="width:30px;height:30px;" ></div>';
+            document.getElementById("beeingAttackedQueue" + player + character).innerHTML = html;
+          }else{document.getElementById("beeingAttackedQueue" + player + character).innerHTML = "";}
         }
       }
     }
-    addMouseOverToAllAvatars() {
-      for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
-        this.avatarTarget[i].onmouseover = () => {
-          document.getElementById("mouseoverText").innerHTML = this.avatarDescription[i];
-        }
+    
+    
+  }
+  addMouseOverToAllSkills() {
+    for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
+      this.skillNumbers[i].onmouseover = () => {
+        document.getElementById("mouseoverText").innerHTML = this.skillDescriptions[i];
       }
     }
+  }
+  addMouseOverToAllAvatars() {
+    for (let i = 0; i <= this.avatarTarget.length - 1; i++) {
+      this.avatarTarget[i].onmouseover = () => {
+        document.getElementById("mouseoverText").innerHTML = this.avatarDescription[i];
+      }
+    }
+  }
   addEventhandlerToAllSkills() {
 
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
@@ -479,6 +410,7 @@ class IronHackGame {
               } else if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "self" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isActive === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1 && this.players[0].characters[parseInt(this.fightSequenceElement[0])] === this.players[0].characters[parseInt(savedAvatar.split("")[1])]) {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+                this.attackQueueVisualizer()
                 this.players[0].characters[parseInt(this.fightSequenceElement[2])].recieveDamageAndTypeStateChanges();
               } else {
                 this.players[parseInt(this.savedPlayer)].characters[parseInt(this.fightSequenceElement[0])].chosenSkill = "";
