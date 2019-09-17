@@ -1,19 +1,37 @@
-const skillArrBatman = [
-  { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanpunch.jpg" },
-  { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanbatwing.jpg" },
-  { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/batmanrobin.jpg" },
+const skillArrBatman0 = [
+  { kind: "offense", type: "damage", value: 20, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanpunch.jpg" },
+  { kind: "offense", type: "damage", value: 0, rounds: 2, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanbatwing.jpg" },
+  { kind: "offense", type: "dot", value: 15, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/batmanrobin.jpg" },
   { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/batmangrapplegun.jpg" }
 ];
-const skillArrIronman = [
-  { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanhandbeam.jpg" },
-  { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanallsuits.jpg" },
-  { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/ironmanpunch.jpg" },
+const skillArrIronman0 = [
+  { kind: "offense", type: "damage", value: 15, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanhandbeam.jpg" },
+  { kind: "defense", type: "heal", value: 15, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanallsuits.jpg" },
+  { kind: "offense", type: "damage", value: 35, rounds: 1, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/ironmanpunch.jpg" },
   { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/ironmanheavyarmor.jpg" }
 ];
-const skillArrSuperman = [
-  { kind: "offense", type: "damage", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/supermanpunch.jpg" },
-  { kind: "defense", type: "heal", value: 10, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/supermanlasereyes.jpg" },
-  { kind: "offense", type: "dot", value: 5, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/supermanbreath.jpg" },
+const skillArrSuperman0 = [
+  { kind: "offense", type: "damage", value: 25, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/supermanpunch.jpg" },
+  { kind: "offense", type: "damagedot", value: 5, rounds: 3, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/supermanlasereyes.jpg" },
+  { kind: "offense", type: "area", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/supermanbreath.jpg" },
+  { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/supermansun.jpg" }
+];
+const skillArrBatman1 = [
+  { kind: "offense", type: "damage", value: 20, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanpunch.jpg" },
+  { kind: "offense", type: "damage", value: 0, rounds: 2, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/batmanbatwing.jpg" },
+  { kind: "offense", type: "dot", value: 15, rounds: 2, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/batmanrobin.jpg" },
+  { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/batmangrapplegun.jpg" }
+];
+const skillArrIronman1 = [
+  { kind: "offense", type: "damage", value: 15, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanhandbeam.jpg" },
+  { kind: "defense", type: "heal", value: 15, rounds: 1, viableTarget: "allied", coolDown: 1, isAvailable: 0, imgPath: "./img/ironmanallsuits.jpg" },
+  { kind: "offense", type: "damage", value: 35, rounds: 1, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/ironmanpunch.jpg" },
+  { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/ironmanheavyarmor.jpg" }
+];
+const skillArrSuperman1 = [
+  { kind: "offense", type: "damage", value: 25, rounds: 1, viableTarget: "opponent", coolDown: 1, isAvailable: 0, imgPath: "./img/supermanpunch.jpg" },
+  { kind: "offense", type: "damagedot", value: 5, rounds: 3, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/supermanlasereyes.jpg" },
+  { kind: "offense", type: "area", value: 10, rounds: 1, viableTarget: "opponent", coolDown: 2, isAvailable: 0, imgPath: "./img/supermanbreath.jpg" },
   { kind: "defense", type: "invulnerable", value: 1, rounds: 1, viableTarget: "self", coolDown: 3, isAvailable: 0, imgPath: "./img/supermansun.jpg" }
 ];
 
@@ -36,25 +54,25 @@ class IronHackGame {
     this.skillDescriptions = [
       "Batman punches with the force of all his anger and desperation! Deals 20 damage to its target.",
       "Batman throws his Batwing and stuns for one turn!",
-      "Batman calls Robin, together they punch even harder! Deals 30 damage to its target.",
+      "Batman calls Robin, together they punch even harder! Deals 30 damage over two rounds to its target.",
       "Batman uses his grapple to get out of a fight, becomes unattackable for one turn and removes all debuffs!",
       "Ironman shoots Highenergybeam from his Hand! Dealing 15 damage to its target",
-      "Ironman calls his suits to protect someone on the team. Applies 15 damage reduction to an ally for 1 turn!",
+      "Ironman calls his suits to protect someone on the team. Heals an ally for 15 for 1 turn!",
       "Ironman flies really fast and punches the enemy! Deals 35 damage to his target.",
       "Ironman calls his thickest indestructable armored suit, becomes invulnerable for one turn and removes all debuffs!",
-      "Superman flies towards the enemie and throws a punch. Wow what a punch! Deals 25 damage to its target.",
+      "Superman flies towards the enemie and throws a punch. Deals 25 damage to its target.",
       "Superman uses his laserbeams from his eyes, leaving initial 15 damage and the target burns for 2 turns, 5 damage each turn!",
       "Superman blows his superhuman breath on every enemy! Deals 10 damage to all enemies.",
       "Superman flies to the sun and becomes invulnerable for one turn, removes all debuffs!",
       "Batman punches with the force of all his anger and desperation! Deals 20 damage to its target.",
       "Batman throws his Batwing and stuns for one turn!",
-      "Batman calls Robin, together they punch even harder! Deals 30 damage to its target.",
+      "Batman calls Robin, together they punch even harder! Deals 30 damage over two rounds to its target.",
       "Batman uses his grapple to get out of a fight, becomes unattackable for one turn and removes all debuffs!",
       "Ironman shoots Highenergybeam from his Hand! Dealing 15 damage to its target",
-      "Ironman calls his suits to protect someone on the team. Applies 15 damage reduction to an ally for 1 turn!",
+      "Ironman calls his suits to protect someone on the team. Heals an ally for 15 for 1 turn!",
       "Ironman flies really fast and punches the enemy! Deals 35 damage to his target.",
       "Ironman calls his thickest indestructable armored suit, becomes invulnerable for one turn and removes all debuffs!",
-      "Superman flies towards the enemie and throws a punch. Wow what a punch! Deals 25 damage to its target.",
+      "Superman flies towards the enemie and throws a punch. Deals 25 damage to its target.",
       "Superman uses his laserbeams from his eyes, leaving initial 15 damage and the target burns for 2 turns, 5 damage each turn!",
       "Superman blows his superhuman breath on every enemy! Deals 10 damage to all enemies.",
       "Superman flies to the sun and becomes invulnerable for one turn, removes all debuffs!"
@@ -108,21 +126,20 @@ class IronHackGame {
   }
   checkCharactersHealth() {
     let counter;
-    for(let i=0;i<=this.players.length-1;i++){
-      counter =0;
+    for (let i = 0; i <= this.players.length - 1; i++) {
+      counter = 0;
       this.players[i].characters.forEach((char) => {
-        if(char.health === 0){
+        if (char.health === 0) {
           counter++;
         }
       })
-      if(counter === 3){
-        if(i===0){
-          alert("Player 2 has won! Congratulation!")
-        }else {alert("Player1 has won! Congratulations!")}
+      if (counter === 3) {
+        if (i === 0) {
+          alert("Player 2 has won! Congratulation!");
+        } else { alert("Player1 has won! Congratulations!") }
       }
     }
     this.state = "choosingSkills";
-    this.nextRound();
     game.updateDOM();
   }
   updateDOM() {
@@ -182,7 +199,7 @@ class IronHackGame {
           });
           this.idArray.forEach((coord) => {
             if (coord[0] === 0) {
-              if (this.players[0].characters[coord[1]].skills[coord[2]].isAvailable === 0 && this.players[0].characters[coord[1]].chosenSkill === "" && this.players[0].characters[coord[1]].health >= 1/*&& checkResources()=== true*/) {
+              if (this.players[0].characters[coord[1]].skills[coord[2]].isAvailable === 0 && this.players[0].characters[coord[1]].chosenSkill === "" && this.players[0].characters[coord[1]].health >= 1 && this.players[0].characters[coord[1]].isActive === 0/*&& checkResources()=== true*/) {
                 document.getElementById("" + coord[0] + coord[1] + coord[2]).parentNode.style.opacity = 1;
               }
             } else {
@@ -197,7 +214,7 @@ class IronHackGame {
           });
           this.idArray.forEach((coord) => {
             if (coord[0] === 1) {
-              if (this.players[1].characters[coord[1]].skills[coord[2]].isAvailable === 0 && this.players[1].characters[coord[1]].chosenSkill === "" && this.players[1].characters[coord[1]].health >= 1 /*&& checkResources()=== true*/) {
+              if (this.players[1].characters[coord[1]].skills[coord[2]].isAvailable === 0 && this.players[1].characters[coord[1]].chosenSkill === "" && this.players[1].characters[coord[1]].health >= 1 && this.players[1].characters[coord[1]].isActive === 0/*&& checkResources()=== true*/) {
                 document.getElementById("" + coord[0] + coord[1] + coord[2]).parentNode.style.opacity = 1;
               }
             } else {
@@ -311,7 +328,6 @@ class IronHackGame {
     }
   }
   attackQueueVisualizer() {
-    let html = "";
     /*for (let i = 0; i <= this.players[0].characters[0].beeingAttacked.length - 1; i++) {
       console.log(this.players[0].characters[0]);
       if(this.players[0].characters[0].beeingAttacked[i] !== ""){
@@ -319,20 +335,44 @@ class IronHackGame {
       }
       else {return;}
       //<img src="./img/selectedSkill.jpg" alt="selected Skill" id="005">
-    }*/
-    for(let player=0;player<=this.players.length-1;player++){
-      for(let character=0;character<=this.players[player].characters.length-1;character++){
-        for(let skill=0;skill<=this.players[player].characters[character].beeingAttacked.length-1;skill++){
+    }
+        for(let player = 0; player < this.players.length; player++){
+      for(let character = 0; character < this.players[player].characters.length; character++){
+        for(let skill = 0; skill < this.players[player].characters[character].beeingAttacked.length; skill++){
           console.log(document.getElementById("beeingAttackedQueue" + player + character).innerHTML);
-          if(this.players[player].characters[character].beeingAttacked !== ""){
+          if(this.players[player].characters[character].beeingAttacked != "") {
+            let html="";
             html += '<div><img src="' + this.players[player].characters[character].beeingAttacked[skill].imgPath + '" alt="SkillImage" style="width:30px;height:30px;" ></div>';
             document.getElementById("beeingAttackedQueue" + player + character).innerHTML = html;
-          }else{document.getElementById("beeingAttackedQueue" + player + character).innerHTML = "";}
+          } else {
+
+            document.getElementById("beeingAttackedQueue" + player + character).innerHTML = "";}
         }
       }
+    }*/
+
+
+    for (let [playerIndex, player] of this.players.entries()) {
+
+      for (let [characterIndex, character] of player.characters.entries()) {
+        if (character.beeingAttacked.length == 0) {
+          document.getElementById("beeingAttackedQueue" + playerIndex + characterIndex).innerHTML = "";
+        }
+        let html = "";
+        for (let skill of character.beeingAttacked) {
+
+          html += '<div><img src="' + skill.imgPath + '" alt="SkillImage" style="width:30px;height:30px;" ></div>';
+        }
+        document.getElementById("beeingAttackedQueue" + playerIndex + characterIndex).innerHTML = html;
+
+      }
     }
-    
-    
+
+
+
+
+
+
   }
   addMouseOverToAllSkills() {
     for (let i = 0; i <= this.skillNumbers.length - 1; i++) {
@@ -401,7 +441,15 @@ class IronHackGame {
           switch (this.turn) {
             case 0:
               savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
-              if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "opponent" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
+              if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "opponent" && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].type === "area" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                for (let availableTarget = 0; availableTarget < this.players[1].characters.length; availableTarget++) {
+                  if (this.players[1].characters[availableTarget].isInvulnerable === 0) {
+                    this.players[1].characters[availableTarget].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+                  }
+                }
+              }
+              else if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "opponent" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[1].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
               } else if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[0].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "allied" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
@@ -423,7 +471,15 @@ class IronHackGame {
               break;
             case 1:
               savedAvatar = this.avatarTarget[i].getElementsByTagName("img")[0].getAttribute("id");
-              if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "opponent" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
+              if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "opponent" && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].type === "area" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
+                this.fightSequenceElement.push(savedAvatar.split("")[1]);
+                for (let availableTarget = 0; availableTarget < this.players[0].characters.length; availableTarget++) {
+                  if (this.players[0].characters[availableTarget].isInvulnerable === 0) {
+                    this.players[0].characters[availableTarget].beeingAttacked.push({ ...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
+                  }
+                }
+              }
+              else if (parseInt(savedAvatar.split("")[0]) === 0 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "opponent" && this.players[0].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[0].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
                 this.fightSequenceElement.push(savedAvatar.split("")[1]);
                 this.players[0].characters[parseInt(this.fightSequenceElement[2])].beeingAttacked.push({ ...this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])] });
               } else if (parseInt(savedAvatar.split("")[0]) === 1 && this.players[1].characters[parseInt(this.fightSequenceElement[0])].skills[parseInt(this.fightSequenceElement[1])].viableTarget === "allied" && this.players[1].characters[parseInt(savedAvatar.split("")[1])].isInvulnerable === 0 && this.players[1].characters[parseInt(savedAvatar.split("")[1])].health >= 1) {
@@ -554,20 +610,39 @@ class Char {
       if (this.isInvulnerable !== 0) {
         this.isInvulnerable -= 1;
       }
+      if (this.skills[3].isAvailable !== 0) {
+        this.skills[3].isAvailable -= 1;
+      }
       for (let i = 0; i <= this.beeingAttacked.length - 1; i++) {
         switch (this.beeingAttacked[i].type) {
           case "damage":
             this.health -= this.beeingAttacked[i].value;
             this.beeingAttacked[i].rounds -= 1;
+            this.isActive += this.beeingAttacked[i].rounds;
+
+            break;
+          case "damagedot":
+            this.beeingAttacked[i].type = "dot"
+            this.health -= (this.beeingAttacked[i].value * 3);
+            this.beeingAttacked[i].rounds -= 1;
+
             break;
           case "dot":
             this.health -= this.beeingAttacked[i].value;
             this.beeingAttacked[i].rounds -= 1;
+
             break;
           case "stun":
             this.health -= this.beeingAttacked[i].value;
             this.isActive = this.beeingAttacked[i].rounds;
             this.beeingAttacked[i].rounds -= 1;
+
+            break;
+          case "area":
+            this.health -= this.beeingAttacked[i].value;
+            this.beeingAttacked[i].rounds -= 1;
+
+            break;
         }
       }
       this.beeingAttacked = this.beeingAttacked.filter((skills) => { return skills.rounds > 0; });
@@ -578,11 +653,13 @@ class Char {
           this.isInvulnerable = this.beeingAttacked[i].rounds;
           this.isActive += this.beeingAttacked[i].rounds;
           this.beeingAttacked = [];
+          this.skills[3].isAvailable = this.skills[3].coolDown;
         } else {
           switch (this.beeingAttacked[i].type) {
             case "heal":
               this.health += this.beeingAttacked[i].value;
               this.beeingAttacked[i].rounds -= 1;
+
               break;
           }
         }
